@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  postgres:
+    image: mysql:5.7
+    container_name: mysql_cash
+    restart: always
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/storage:/var/lib/mysql:rw
+      - ./database/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
